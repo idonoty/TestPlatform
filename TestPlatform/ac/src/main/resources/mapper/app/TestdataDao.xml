@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.analysys.automation.modules.app.dao.TestdataDao">
+
+    <select id="queryGroupNameList" resultType="string">
+        select distinct group_name from t_profile_record
+    </select>
+
+    <select id="queryDateList" resultType="java.util.Date">
+        SELECT DISTINCT DATE_FORMAT(tf_xwhen,'%Y-%m-%d') d FROM t_profile_record where group_name = #{groupName} order by d desc
+    </select>
+
+</mapper>

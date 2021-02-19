@@ -1,0 +1,83 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 8080
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /ac
+
+logging:
+  config: classpath:logging-config.xml
+  active: dev
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: prod
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /static/**
+  resources:
+    add-mappings: false
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.analysys.automation.modules.*.entity
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    logic-delete-value: -1
+    logic-not-delete-value: 0
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+
+automation:
+  jwt:
+    # 加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token有效时长，7天，单位秒
+    expire: 604800
+    header: token
+  cohort:
+    url: https://arkpaastest.analysys.cn:4005/uba/api/cohort/users
+    appKey: ef48123af739643e
+    token: 34a59d1d3fdf143cdf70b3d61067ee4b
+    cohortCode: arkfq_2
+file:
+  filepath:
+    upload: D:\\test\\upload\\
+    download: D:\\test\\download\\
+    template: D:\\test\\template\\
+
+

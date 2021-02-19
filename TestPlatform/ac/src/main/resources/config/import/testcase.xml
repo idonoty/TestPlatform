@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<workbook>
+    <worksheet name="Sheet1">
+        <!-- 开始行数，和结束行数。把EXCEL表中的前两排直接干掉-->
+        <section startRow="0" endRow="0"></section>
+        <!-- 下面是一行的模版，获取一行，之后的行数就按这个模版来获取-->
+        <!-- items是集合的名称。-->
+        <loop startRow="1" endRow="1" items="list" var="testcaseVo" varType="com.analysys.automation.modules.app.vo.TestcaseVO">
+            <section startRow="1" endRow="1">
+                <mapping row="1" col="0">testcaseVo.testcaseCode</mapping>
+                <mapping row="1" col="1">testcaseVo.projectName</mapping>
+                <mapping row="1" col="2">testcaseVo.moduleName</mapping>
+                <mapping row="1" col="3">testcaseVo.version</mapping>
+                <mapping row="1" col="4">testcaseVo.uri</mapping>
+                <mapping row="1" col="5">testcaseVo.method</mapping>
+                <mapping row="1" col="6">testcaseVo.data</mapping>
+                <mapping row="1" col="7">testcaseVo.expectedResult</mapping>
+                <mapping row="1" col="8">testcaseVo.description</mapping>
+            </section>
+            <loopbreakcondition>
+                <rowcheck offset="0">
+                    <cellcheck offset="0"></cellcheck>
+                </rowcheck>
+                <!--循环到值为空的时候结束 -->
+            </loopbreakcondition>
+        </loop>
+    </worksheet>
+</workbook>
