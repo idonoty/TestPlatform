@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <% if (process.env.NODE_ENV === 'production') { %>
+  <!-- 生产环境 -->
+  <script>document.write('<script src="./config/index.js?t=' + new Date().getTime() + '"><\/script>');</script>
+  <% }else { %>
+  <!-- 开发环境 -->
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="./static/img/favicon.ico"> -->
+  <script src="./static/config/index.js"></script>
+  <!-- <script src="./static/plugins/mock-1.0.0-beta3/mock-min.js"></script>
+    <script src="./static/plugins/echarts-3.8.5/echarts.common.min.js"></script>
+    <script src="./static/plugins/ueditor-1.4.3.3/ueditor.config.js"></script>
+    <script src="./static/plugins/ueditor-1.4.3.3/ueditor.all.min.js"></script>
+    <script src="./static/plugins/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script> -->
+  <% } %>
+  <script>
+    (function (config) {
+      window.AnalysysAgent = window.AnalysysAgent || []
+      window.AnalysysAgent.methods = 'identify alias reset track profileSet profileSetOnce profileIncrement profileAppend profileUnset profileDelete registerSuperProperty registerSuperProperties unRegisterSuperProperty clearSuperProperties getSuperProperty getSuperProperties pageView debugMode auto appkey name uploadURL hash visitorConfigURL autoProfile autoWebstay encryptType pageProperty'.split(' ');
+
+      function factory(b) {
+        return function () {
+          var a = Array.prototype.slice.call(arguments);
+          a.unshift(b);
+          window.AnalysysAgent.push(a);
+          return window.AnalysysAgent;
+        }
+      };
+      for (var i = 0; i < AnalysysAgent.methods.length; i++) {
+        var key = window.AnalysysAgent.methods[i];
+        AnalysysAgent[key] = factory(key);
+      }
+      for (var key in config) {
+        AnalysysAgent[key](config[key])
+      }
+    })({
+      appkey: 'testcase222', //APPKEY
+      // uploadURL: 'https://arkpaastest.analysys.cn:4089',//上传数据的地址
+      uploadURL: 'http://117.50.5.132:8089', //上传数据的地址
+      debugMode:2,
+      auto:true
+    })
+  </script>
+
+  <script type="text/javascript" id="ARK_SDK" src="./config/AnalysysAgent_JS_SDK.min.js"></script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>
